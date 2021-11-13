@@ -5,10 +5,10 @@ import ArowLogo from "../images/send.svg"
 const MessageInput = () => {
     return (
         <form action="#">
-            <div className="flex mb-0 mt-auto">
-                <input className="p-2 rounded-2xl border-gray-600 bg-gray-600 w-full focus:border-gray-500 pl-4" placeholder="Write a message..."  type="text" />
+            <div className="flex items-center">
+                <input className="p-2 rounded-xl text-2xl text-white border-gray-600 bg-gray-600 w-full focus:border-gray-500 pl-4" placeholder="Write a message..."  type="text" />
                 <Link href="#">
-                    <div className="border-gray-600 bg-gray-600 rounded-xl p-4 ml-2 ">
+                    <div className="border-gray-600 border-2 p-3  bg-gray-600 rounded-xl ml-2   leading-4">
                         <Image
                             src={ArowLogo}
                             alt="Arow"
