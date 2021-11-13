@@ -3,7 +3,7 @@ import Chanel from "./Chanel";
 const Chanels = () => {
 	return (
 		<div>
-			<Chanel text="finance" ></Chanel>
+			<Chanel name="finance" lastMessage="Yo betaal je tax en shit" ></Chanel>
 		</div>
 	);
 };
