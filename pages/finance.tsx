@@ -6,9 +6,11 @@ import MessageInput from "../components/MessageInput";
 const FinancePage = () => {
   return (
     <Layout title="Finance">
-      <MessageHeader text="Finance"></MessageHeader>
-      <Messages></Messages>
-      <MessageInput></MessageInput>
+      <div className="flex flex-col justify-between h-full">
+        <MessageHeader text="Finance"></MessageHeader>
+        <Messages></Messages>
+        <MessageInput></MessageInput>
+      </div>
     </Layout>
   );
 };
