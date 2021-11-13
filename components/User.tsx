@@ -3,7 +3,7 @@ import UserLogo from '../images/user.svg'
 
 const User = ({ text }) => {
 	return (
-            <div>
+            <div className="w-full m-4">
                 <Image
                     src={UserLogo}
                     alt="default user"

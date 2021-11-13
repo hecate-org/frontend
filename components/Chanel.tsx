@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import FinaceneLogo from '../images/finance.svg'
+import FinanceLogo from '../images/finance.svg'
 
 const Chanel = ({ text }) => {
 	return (
-		<Link href="#" >
+		<Link href={`/${text}`} >
             <div>
                 <Image
-                    src={FinaceneLogo}
-                    alt="default user"
+                    src={FinanceLogo}
+                    alt="Finance"
                     width={125}
                     height={125}
                 />
