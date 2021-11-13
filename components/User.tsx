@@ -3,14 +3,14 @@ import UserLogo from '../images/user.svg'
 
 const User = ({ text }) => {
 	return (
-            <div className="w-full m-4">
+            <div className="w-full m-6 flex">
                 <Image
                     src={UserLogo}
                     alt="default user"
-                    width={125}
-                    height={125}
+                    width={75}
+                    height={75}
                 />
-                <p>{text}</p>
+                <p className="ml-8 text-2xl text-white">{text}</p>
             </div>
 	);
 };
