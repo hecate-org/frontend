@@ -1,4 +1,7 @@
-import { User } from '../interfaces'
+interface User {
+  id:Number;
+  name:String;
+}
 
 /** Dummy user data. */
 export const sampleUserData: User[] = [
@@ -7,3 +10,4 @@ export const sampleUserData: User[] = [
   { id: 103, name: 'Caroline' },
   { id: 104, name: 'Dave' },
 ]
+
