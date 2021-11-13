@@ -16,11 +16,15 @@ const Layout = ({ children, title}: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <User text="jan jansens"></User>
-    <header>
-      <Chanels></Chanels>
-    </header>
-    {children}
+    <div className="w-10/12 flex mx-auto">
+      <header className="w-2/6 bg-red-600">
+        <User text="jan jansens"></User>
+        <Chanels></Chanels>
+      </header>
+      <main className="w-4/6 bg-black">
+        {children}
+      </main>
+    </div>
   </div>
 )
 
