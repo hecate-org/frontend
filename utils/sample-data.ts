@@ -1,7 +1,4 @@
-interface User {
-  id:Number;
-  name:String;
-}
+import { User } from "./interfaces"
 
 /** Dummy user data. */
 export const sampleUserData: User[] = [
