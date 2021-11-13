@@ -10,7 +10,7 @@ const User = ({ name, familyname }) => {
                     width={75}
                     height={75}
                 />
-                <p className="ml-8 text-3xl text-white">{text}</p>
+                <p className="ml-8 text-3xl text-white"><span>{name}</span>{familyname}</p>
             </div>
 	);
 };
