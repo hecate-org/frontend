@@ -18,7 +18,7 @@ const Layout = ({ children, title}: Props) => (
     </Head>
     <div className="w-10/12 flex mx-auto">
       <header className="w-2/6 bg-gray-600">
-        <User text="Jan Jansens"></User>
+        <User name="Jan" familyname="Jansens"></User>
         <Chanels></Chanels>
       </header>
       <main className="w-4/6 bg-gray-400">

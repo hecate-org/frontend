@@ -1,7 +1,7 @@
 import Image from "next/image";
 import UserLogo from '../images/user.svg'
 
-const User = ({ text }) => {
+const User = ({ name, familyname }) => {
 	return (
             <div className="w-full m-6 flex">
                 <Image
@@ -10,7 +10,7 @@ const User = ({ text }) => {
                     width={75}
                     height={75}
                 />
-                <p className="ml-8 text-2xl text-white">{text}</p>
+                <p className="ml-8 text-3xl text-white">{text}</p>
             </div>
 	);
 };
