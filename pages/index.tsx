@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { useReducer, useState, useEffect, useRef } from "react";
+import { useReducer, useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import webSocket from "../utils/websocket";
 import { Message } from "../utils/interfaces";
@@ -8,8 +7,6 @@ const IndexPage = () => {
   const socketCon = webSocket();
 
   const [socket, setSocket] = useState(null);
-
-  const inputRef = useRef(null);
 
   const sendMessage = (message:Message) =>{
     dispatch(message)
@@ -45,13 +42,9 @@ const IndexPage = () => {
   }, [socketCon]);
 
   return (
-    <div>
-      {messages.map((message) => {
-        <div>{message.sender}</div>;
-      })}
-      <input ref={inputRef} />
-      <button onClick={()=>console.log(inputRef.current)}></button>
-    </div>
+    <Layout title="Home">
+      <h1>Select a message</h1>
+    </Layout>
   );
 };
 
