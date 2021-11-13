@@ -10,7 +10,7 @@ type Props = {
 }
 
 const Layout = ({ children, title}: Props) => (
-  <div className="bg-gray-800">
+  <div className="bg-gray-600">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
