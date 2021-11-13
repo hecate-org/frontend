@@ -16,7 +16,7 @@ const Layout = ({ children, title}: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <div className="w-10/12 flex mx-auto">
+    <div className="w-10/12 flex mx-auto h-screen">
       <header className="w-2/6 bg-gray-600">
         <User name="Jan" familyname="Jansens"></User>
         <Chanels></Chanels>
