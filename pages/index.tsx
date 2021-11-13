@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useReducer, useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import webSocket from "../utils/websocket";
@@ -35,8 +34,8 @@ const IndexPage = () => {
   }, [socketCon]);
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
-      <h1>Hello Next.js 👋</h1>
+    <Layout title="Home">
+      <h1>Select a message</h1>
     </Layout>
   );
 };
