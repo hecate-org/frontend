@@ -11,12 +11,12 @@ const Messages = (props) => {
   return (
     <div className="h-full py-4  overflow-y-scroll ">
       <IncommingMessage text="Heel lekkere text enz"></IncommingMessage>
-      <OutgoingMessage text="Heel lekkere text enz"></OutgoingMessage>
+      <OutgoingMessage text="Heel lekkere text enz" time="12"></OutgoingMessage>
       <IncommingFile text="Heel lekkere text enz"></IncommingFile>
       <OutgoingFile text="Heel lekkere text enz"></OutgoingFile>
       {props.messages.map((message: Message) => {
         console.log(message)
-        return <OutgoingMessage text={message.content}></OutgoingMessage>;
+        return <OutgoingMessage text={message.content} time={message.timestamp}></OutgoingMessage>;
       })}
     </div>
   );

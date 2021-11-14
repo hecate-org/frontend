@@ -15,7 +15,7 @@ const Channel = () => {
   const ws = useContext(SocketContext);
 
   const [channelObject, setChannelObject] = useState(null);
-  const [socket, setSocket] = useState(null);
+  const [lastSend, setLastSend] = useState(Number(new Date()));
 
   const sendMessage = (message: string, type: MessageTypes) => {
     const messageObject: Message = {
@@ -32,13 +32,15 @@ const Channel = () => {
   const [messages, dispatch] = useReducer((state: Message[], action: any) => {
     switch (action.type) {
       case "SEND_MESSAGE":
+        if (lastSend == action.messageObject.timestamp) return state;
+        setLastSend(action.messageObject.timestamp);
         console.log("action: ", action.messageObject);
         ws.emit("message", action.messageObject);
         return [...state, action.messageObject];
       case "RECEIVE_MESSAGE":
         return [...state, action.messageObject];
-      case "RESET_MESSAGES":
-        return [];
+      case "SET_MESSAGES":
+        return action.messages;
       default:
         new Error("Unknown action type");
         return state;
@@ -50,11 +52,10 @@ const Channel = () => {
     console.log("channelid: ", Number(channel));
     ws.emit("joinRoom", channel);
     ws.emit("getChannel", channel);
-  }, [channel,ws]);
+  }, [channel, ws]);
   useEffect(() => {
     if (ws) {
       ws.on("connect", () => {
-        setSocket(ws);
         console.log("connected");
       });
       ws.on("message", (message: Message) => {
@@ -63,6 +64,8 @@ const Channel = () => {
       ws.on("channelInfo", (channel) => {
         console.log("channelemit", channel);
         setChannelObject(channel);
+        const messages = channel.Message;
+        dispatch({ type: "SET_MESSAGES", messages });
       });
     }
   }, [ws]);
