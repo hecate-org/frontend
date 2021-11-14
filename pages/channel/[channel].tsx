@@ -10,9 +10,9 @@ import { Message, MessageTypes } from "@hecate-org/blingaton-types/build";
 const Channel = () => {
   const router = useRouter();
   const { channel } = router.query;
-
   const socketCon = webSocket();
 
+  const [channelObject, setChannelObject] = useState(null);
   const [socket, setSocket] = useState(null);
 
   const sendMessage = (message: string, type: MessageTypes) => {
@@ -30,11 +30,11 @@ const Channel = () => {
   const [messages, dispatch] = useReducer((state: Message[], action: any) => {
     switch (action.type) {
       case "SEND_MESSAGE":
-        console.log("action: ", action.message);
-        socket.emit("message", action.message);
-        return [...state, action.message];
+        console.log("action: ", action.messageObject);
+        socketCon.emit("message", action.messageObject);
+        return [...state, action.messageObject];
       case "RECEIVE_MESSAGE":
-        return [...state, action.message];
+        return [...state, action.messageObject];
       case "RESET_MESSAGES":
         return [];
       default:
@@ -42,15 +42,25 @@ const Channel = () => {
         return state;
     }
   }, []);
-
+  useEffect(() => {
+    if (!channel || !socketCon) return;
+    socketCon.emit("login", "1");
+    console.log("channelid: ", Number(channel));
+    socketCon.emit("joinRoom", channel);
+    socketCon.emit("getChannel", channel);
+  }, [channel,socketCon]);
   useEffect(() => {
     if (socketCon) {
-      socketCon.on("connect", () => {
+      socketCon.on("connect", async () => {
         setSocket(socketCon);
         console.log("connected");
       });
       socketCon.on("message", (message: Message) => {
         dispatch({ type: "RECEIVE_MESSAGE", message });
+      });
+      socketCon.on("channelInfo", (channel) => {
+        console.log("channelemit", channel);
+        setChannelObject(channel);
       });
     }
   }, [socketCon]);
@@ -58,7 +68,7 @@ const Channel = () => {
   return (
     <Layout title="Finance">
       <div className="flex flex-col justify-between h-full">
-        <MessageHeader text={channel}></MessageHeader>
+        <MessageHeader text={channelObject?.name}></MessageHeader>
         <Messages messages={messages}></Messages>
         <MessageInput sendMessage={sendMessage}></MessageInput>
       </div>
