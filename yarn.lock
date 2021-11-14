@@ -75,6 +75,11 @@
   resolved "https://registry.npmjs.org/@hapi/hoek/-/hoek-9.2.1.tgz"
   integrity sha512-gfta+H8aziZsm8pZa0vj04KO6biEiisppNgA1kbJvFrrWu9Vm7eaUEy76DIxsuTaWvti5fkJVhllWc6ZTE+Mdw==
 
+"@hecate-org/blingaton-types@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@hecate-org/blingaton-types/-/blingaton-types-1.0.11.tgz#d2a7afc4509b76988856af6494250b4ade6d3ca5"
+  integrity sha512-kEoAwpWDJsbNfL4fMpBZ2M+A0QCBnGh091N0N7ppXBFGix17fJ7YWGgQjBdkE0NdT3MLh/Oxqp8qx4qgiCJQ1g==
+
 "@napi-rs/triples@1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@napi-rs/triples/-/triples-1.0.3.tgz"

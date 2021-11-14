@@ -7,6 +7,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@hecate-org/blingaton-types": "^1.0.11",
     "@types/socket.io-client": "^3.0.0",
     "@types/tailwindcss": "^2.2.4",
     "next": "latest",
