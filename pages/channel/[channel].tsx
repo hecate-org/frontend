@@ -35,7 +35,7 @@ const Channel = () => {
         if (lastSend == action.messageObject.timestamp) return state;
         setLastSend(action.messageObject.timestamp);
         console.log("action: ", action.messageObject);
-        ws.emit("message", action.messageObject);
+        ws.reply("message", action.messageObject);
         return [...state, action.messageObject];
       case "RECEIVE_MESSAGE":
         return [...state, action.messageObject];
@@ -48,11 +48,11 @@ const Channel = () => {
   }, []);
   useEffect(() => {
     if (!channel || !ws) return;
-    ws.emit("login", "1");
+    ws.reply("login", "1");
     console.log("channelid: ", Number(channel));
-    ws.emit("joinRoom", channel);
-    ws.emit("getChannel", channel);
-  }, [channel, ws]);
+    ws.reply("joinRoom", channel);
+    ws.reply("getChannel", channel);
+  }, [channel,ws]);
   useEffect(() => {
     if (ws) {
       ws.on("connect", () => {
