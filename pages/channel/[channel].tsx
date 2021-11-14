@@ -32,7 +32,7 @@ const Channel = () => {
   const [messages, dispatch] = useReducer((state: Message[], action: any) => {
     switch (action.type) {
       case "SEND_MESSAGE":
-        if (lastSend == action.messageObject.timestamp) return state;
+        if (lastSend == action.messageObject.timestamp) return [...state, action.messageObject];
         setLastSend(action.messageObject.timestamp);
         console.log("action: ", action.messageObject);
         ws.reply("message", action.messageObject);
