@@ -1,17 +1,18 @@
-import { useReducer, useState, useEffect } from "react";
-import webSocket from "../../utils/websocket";
+import { Message, MessageTypes } from "@hecate-org/blingaton-types/build";
+import { useContext, useEffect, useReducer, useState } from "react";
+
 import Layout from "../../components/Layout";
 import MessageHeader from "../../components/MessageHeader";
-import Messages from "../../components/Messages";
 import MessageInput from "../../components/MessageInput";
+import Messages from "../../components/Messages";
+import { SocketContext } from "../../utils/websocket";
 import { useRouter } from "next/router";
-import { Message, MessageTypes } from "@hecate-org/blingaton-types/build";
 
 const Channel = () => {
   const router = useRouter();
   const { channel } = router.query;
 
-  const socketCon = webSocket();
+  const ws = useContext(SocketContext);
 
   const [socket, setSocket] = useState(null);
 
@@ -44,16 +45,16 @@ const Channel = () => {
   }, []);
 
   useEffect(() => {
-    if (socketCon) {
-      socketCon.on("connect", () => {
-        setSocket(socketCon);
+    if (ws) {
+      ws.on("connect", () => {
+        setSocket(ws);
         console.log("connected");
       });
-      socketCon.on("message", (message: Message) => {
+      ws.on("message", (message: Message) => {
         dispatch({ type: "RECEIVE_MESSAGE", message });
       });
     }
-  }, [socketCon]);
+  }, [ws]);
 
   return (
     <Layout title="Finance">
