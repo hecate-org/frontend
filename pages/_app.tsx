@@ -1,10 +1,18 @@
-import React from 'react'
-import { AppProps } from 'next/app'
+import "../styles/index.css";
 
-import '../styles/index.css'
+import webSocket, { SocketContext } from "../utils/websocket";
+
+import { AppProps } from "next/app";
+import React from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const ws = webSocket();
+
+  return (
+    <SocketContext.Provider value={ws}>
+      <Component {...pageProps} />
+    </SocketContext.Provider>
+  );
 }
 
-export default MyApp
+export default MyApp;

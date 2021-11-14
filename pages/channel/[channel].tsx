@@ -1,16 +1,18 @@
-import { useReducer, useState, useEffect } from "react";
-import webSocket from "../../utils/websocket";
+import { Message, MessageTypes } from "@hecate-org/blingaton-types/build";
+import { useContext, useEffect, useReducer, useState } from "react";
+
 import Layout from "../../components/Layout";
 import MessageHeader from "../../components/MessageHeader";
-import Messages from "../../components/Messages";
 import MessageInput from "../../components/MessageInput";
+import Messages from "../../components/Messages";
+import { SocketContext } from "../../utils/websocket";
 import { useRouter } from "next/router";
-import { Message, MessageTypes } from "@hecate-org/blingaton-types/build";
 
 const Channel = () => {
   const router = useRouter();
   const { channel } = router.query;
-  const socketCon = webSocket();
+
+  const ws = useContext(SocketContext);
 
   const [channelObject, setChannelObject] = useState(null);
   const [socket, setSocket] = useState(null);
@@ -31,7 +33,7 @@ const Channel = () => {
     switch (action.type) {
       case "SEND_MESSAGE":
         console.log("action: ", action.messageObject);
-        socketCon.emit("message", action.messageObject);
+        ws.emit("message", action.messageObject);
         return [...state, action.messageObject];
       case "RECEIVE_MESSAGE":
         return [...state, action.messageObject];
@@ -43,27 +45,27 @@ const Channel = () => {
     }
   }, []);
   useEffect(() => {
-    if (!channel || !socketCon) return;
-    socketCon.emit("login", "1");
+    if (!channel || !ws) return;
+    ws.emit("login", "1");
     console.log("channelid: ", Number(channel));
-    socketCon.emit("joinRoom", channel);
-    socketCon.emit("getChannel", channel);
-  }, [channel,socketCon]);
+    ws.emit("joinRoom", channel);
+    ws.emit("getChannel", channel);
+  }, [channel,ws]);
   useEffect(() => {
-    if (socketCon) {
-      socketCon.on("connect", async () => {
-        setSocket(socketCon);
+    if (ws) {
+      ws.on("connect", () => {
+        setSocket(ws);
         console.log("connected");
       });
-      socketCon.on("message", (message: Message) => {
+      ws.on("message", (message: Message) => {
         dispatch({ type: "RECEIVE_MESSAGE", message });
       });
-      socketCon.on("channelInfo", (channel) => {
+      ws.on("channelInfo", (channel) => {
         console.log("channelemit", channel);
         setChannelObject(channel);
       });
     }
-  }, [socketCon]);
+  }, [ws]);
 
   return (
     <Layout title="Finance">

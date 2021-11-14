@@ -1,5 +1,8 @@
-import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
+import { Socket, io } from "socket.io-client";
+import { createContext, useEffect, useState } from "react";
+
+export const SocketContext = createContext<Socket>(null);
+
 const webSocket = () => {
   const [webSocket, setSocket] = useState(null);
   useEffect(() => {
