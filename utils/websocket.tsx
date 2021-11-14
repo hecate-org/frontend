@@ -12,7 +12,7 @@ import { DefaultEventsMap } from "@socket.io/component-emitter";
 interface CustomSocket extends Socket {
   reply: (
     ev: string,
-    ...args: any[]
+    args: object
   ) => Socket<DefaultEventsMap, DefaultEventsMap>;
 }
 
@@ -124,6 +124,3 @@ const webSocket = () => {
 };
 
 export default webSocket;
-function setSecret(arg0: string) {
-  throw new Error("Function not implemented.");
-}
