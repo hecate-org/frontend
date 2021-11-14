@@ -33,7 +33,7 @@ const Channel = () => {
     switch (action.type) {
       case "SEND_MESSAGE":
         console.log("action: ", action.messageObject);
-        ws.emit("message", action.messageObject);
+        ws.reply("message", action.messageObject);
         return [...state, action.messageObject];
       case "RECEIVE_MESSAGE":
         return [...state, action.messageObject];
@@ -46,10 +46,10 @@ const Channel = () => {
   }, []);
   useEffect(() => {
     if (!channel || !ws) return;
-    ws.emit("login", "1");
+    ws.reply("login", "1");
     console.log("channelid: ", Number(channel));
-    ws.emit("joinRoom", channel);
-    ws.emit("getChannel", channel);
+    ws.reply("joinRoom", channel);
+    ws.reply("getChannel", channel);
   }, [channel,ws]);
   useEffect(() => {
     if (ws) {
